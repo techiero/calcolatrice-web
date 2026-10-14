@@ -8,6 +8,22 @@ let calcoloEseguito = false;  // vero subito dopo il tasto =
 
 const CIFRE = '0123456789';
 
+// I valori dei tasti si leggono dalla pagina: un tasto nuovo funziona anche da tastiera
+const valoriAmmessi = [];
+for (const tasto of tastiera.querySelectorAll('button')) {
+    valoriAmmessi.push(tasto.dataset.value);
+}
+
+// I tasti della tastiera che hanno un altro nome
+const sostituzioni = {
+    'Enter': '=',
+    'Escape': 'C',
+    'Delete': 'C',
+    'c': 'C',
+    'Backspace': 'BKSP',
+    '.': ','
+};
+
 // 3. Il display mostra l'espressione con i simboli della calcolatrice
 function aggiornaDisplay() {
     display.textContent = espressione.replaceAll('*', '×').replaceAll('/', '÷').replaceAll('-', '−');
@@ -95,6 +111,21 @@ function gestisciTasto(valore) {
 tastiera.addEventListener('click', function (event) {
     if (event.target.matches('button')) {
         gestisciTasto(event.target.dataset.value);
+        // il tasto non resta selezionato: la barra spaziatrice non lo premerà di nuovo
+        event.target.blur();
+    }
+});
+
+// 8. La tastiera del computer
+document.addEventListener('keydown', function (event) {
+    let valore = event.key;
+    if (valore in sostituzioni) {
+        valore = sostituzioni[valore];
+    }
+    if (valoriAmmessi.includes(valore)) {
+        // Invio non deve anche premere il tasto selezionato nella pagina
+        event.preventDefault();
+        gestisciTasto(valore);
     }
 });
 

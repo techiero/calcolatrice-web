@@ -18,3 +18,15 @@ Da ripetere dopo ogni modifica a `calc.js`. I tasti si premono con il mouse, nel
 | 7 + 8 = 3 | 3 |
 | 7 + 8 = + 1 = | 16 |
 | 1 ÷ 0 = ⌫ | 0 |
+
+Prove con la tastiera del computer:
+
+| Tasti | Display atteso |
+|---|---|
+| 1 + 2 Invio | 3 |
+| 1 . 5 + 1 Invio | 2,5 |
+| 9 Esc | 0 |
+| 1 2 Backspace | 1 |
+| S P B K | nessun cambiamento |
+| clic su 7, poi barra spaziatrice | 7 |
+| clic su 1 2 + 3, poi Invio | 15 |
