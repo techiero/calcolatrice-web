@@ -9,6 +9,7 @@ Da ripetere dopo ogni modifica a `calc.js`. I tasti si premono con il mouse, nel
 | ( 2 + 3 ) × 4 = | 20 |
 | 1 , 5 + 2 , 5 = | 4 |
 | 0 , 1 + 0 , 2 = | 0,3 |
+| 2 × ( 3 + 4 ) = | 14 |
 | 1 ÷ 0 = | Errore |
 | 5 + = | Errore |
 | 0 × 5 = | 0 |
