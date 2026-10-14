@@ -10,9 +10,28 @@ function aggiornaDisplay() {
     display.textContent = espressione.replaceAll('*', '×').replaceAll('/', '÷').replaceAll('-', '−');
 }
 
-// 4. Riceve il valore di un tasto e aggiorna lo stato
+// 4. Il calcolo
+function calcola() {
+    try {
+        const risultato = eval(espressione.replaceAll(',', '.'));
+        if (!Number.isFinite(risultato)) {
+            throw new Error('risultato non valido');
+        }
+        // al massimo dieci cifre dopo la virgola
+        const arrotondato = Number(risultato.toFixed(10));
+        espressione = String(arrotondato).replace('.', ',');
+    } catch (errore) {
+        espressione = 'Errore';
+    }
+}
+
+// 5. Riceve il valore di un tasto e aggiorna lo stato
 function gestisciTasto(valore) {
     switch (valore) {
+        case '=':
+            calcola();
+            break;
+
         case 'C':
             espressione = '0';
             break;
@@ -26,7 +45,7 @@ function gestisciTasto(valore) {
             break;
 
         default:
-            if (espressione === '0') {
+            if (espressione === '0' || espressione === 'Errore') {
                 espressione = valore;
             } else {
                 espressione = espressione + valore;
@@ -37,7 +56,7 @@ function gestisciTasto(valore) {
     aggiornaDisplay();
 }
 
-// 5. I clic: un solo ascoltatore per tutta la tastiera
+// 6. I clic: un solo ascoltatore per tutta la tastiera
 tastiera.addEventListener('click', function (event) {
     if (event.target.matches('button')) {
         gestisciTasto(event.target.dataset.value);
